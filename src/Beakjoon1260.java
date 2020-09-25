@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
-// 뭐가 문제일까...
+// 백준...런타임에러.. 젠장 ..
 public class Beakjoon1260 {
 
     static ArrayList<Integer>[] map;
@@ -46,15 +46,14 @@ public class Beakjoon1260 {
 
         Arrays.fill(visit,false); // 방문기록 초기화
         dfs(v);
-        str.append("\n");
+        System.out.println();
         Arrays.fill(visit,false); // 방문기록 초기화
         bfs(v);
-        System.out.println(str.toString());
     }
 
     public static void dfs(int c){
         visit[c] = true;
-        str.append(c+" ");
+        System.out.print(c+" ");
         for(int i : map[c] ){
             if(visit[i] == false){
                 dfs(i);
@@ -63,17 +62,17 @@ public class Beakjoon1260 {
     }
 
     public static void bfs(int c){
-        if(visit[c] == false){
-            str.append(c + " ");
-            visit[c] = true;
-            for(int i : map[c] ){
+        queue.offer(c);
+        visit[c] = true;
+
+        while(!queue.isEmpty()){
+            int k = queue.poll();
+            System.out.print(k+" ");
+            for(int i : map[k] ){
                 if(visit[i] == false){
-                    queue.add(i);
+                    queue.offer(i);
+                    visit[i] = true;
                 }
-            }
-            if(!queue.isEmpty()){
-                int s = queue.poll();
-                bfs(s);
             }
         }
     }
